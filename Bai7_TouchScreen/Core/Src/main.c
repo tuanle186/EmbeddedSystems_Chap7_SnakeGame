@@ -38,6 +38,7 @@
 #include "sensor.h"
 #include "buzzer.h"
 #include "touch.h"
+#include "snake_game.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,6 +61,12 @@
 #define INIT 0
 #define DRAW 1
 #define CLEAR 2
+
+//#define START_GAME_INIT 3
+//#define START_GAME 		4
+//#define IN_GAME_INIT	5
+//#define GAME_OVER_INIT 	6
+//#define GAME_OVER		7
 
 int draw_Status = INIT;
 /* USER CODE END PV */
@@ -120,10 +127,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
- touch_Adjust();
+// touch_Adjust();
  lcd_Clear(BLACK);
  while (1)
   {
+
 	  //scan touch screen
 	  touch_Scan();
 	  //check if touch screen is touched
@@ -133,9 +141,10 @@ int main(void)
 	  }
 	  // 50ms task
 	  if(flag_timer2 == 1){
+		  game_state_machine();
 		  flag_timer2 = 0;
-		  touchProcess();
-		  test_LedDebug();
+//		  touchProcess();
+//		  test_LedDebug();
 	  }
 
     /* USER CODE END WHILE */
